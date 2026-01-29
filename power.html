@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Power Calculator</title>
+    <link rel="stylesheet" href="power.css">
+</head>
+
+<body>
+
+    <div class="calculator-container">
+        <div class="calculator-card">
+            <header class="calc-header">
+                <h3>Power Calculator</h3>
+                <p>Instant conversions</p>
+            </header>
+
+            <div class="input-group">
+                <label for="num">Number</label>
+                <input type="number" id="num" placeholder="0" oninput="calculate('num')">
+            </div>
+
+            <div class="input-group">
+                <label for="square">Square (x²)</label>
+                <input type="number" id="square" placeholder="0" oninput="calculate('square')">
+            </div>
+
+            <div class="input-group">
+                <label for="cube">Cube (x³)</label>
+                <input type="number" id="cube" placeholder="0" oninput="calculate('cube')">
+            </div>
+
+            <div class="input-group">
+                <label for="power4">Power 4 (x⁴)</label>
+                <input type="number" id="power4" placeholder="0" oninput="calculate('power4')">
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function calculate(source) {
+            let n;
+
+            if (source === 'num') {
+                n = document.getElementById("num").value;
+            }
+            else if (source === 'square') {
+                n = Math.sqrt(document.getElementById("square").value);
+            }
+            else if (source === 'cube') {
+                n = Math.cbrt(document.getElementById("cube").value);
+            }
+            else if (source === 'power4') {
+                n = Math.pow(document.getElementById("power4").value, 1 / 4);
+            }
+
+            if (n === "" || isNaN(n)) {
+                // Optional: clear other fields if input is empty, or just return
+                // document.getElementById("num").value = "";
+                // document.getElementById("square").value = "";
+                // document.getElementById("cube").value = "";
+                // document.getElementById("power4").value = "";
+                return;
+            }
+
+            // Update all fields based on the derived base number 'n'
+            // Avoid updating the source field to prevent cursor jumping issues in some browsers
+            if (source !== 'num') document.getElementById("num").value = Number(n);
+            if (source !== 'square') document.getElementById("square").value = Number(n ** 2);
+            if (source !== 'cube') document.getElementById("cube").value = Number(n ** 3);
+            if (source !== 'power4') document.getElementById("power4").value = Number(n ** 4);
+        }
+    </script>
+
+</body>
+
+</html>
